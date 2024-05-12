@@ -1,0 +1,251 @@
+<!-- SPDX: AGPL-3.0-only -->
+<!-- XEPL Solo Environment - Copyright (c) 2024 Keith Edwin Robbins
+	Project Name: XEPL Solo Environment
+	File Name:    solo.xml
+	Author:       Keith Edwin Robbins
+	Release date: May 10, 2024
+	Website:      https://xepl.com
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published by
+    the Free Software Foundation version 3 of the License.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+	For more information about the AGPL, please visit:
+ 	https://www.gnu.org/licenses/agpl-3.0.html
+-->
+<?xml version="1.0" encoding="UTF-8"?>
+<Lobe name="solo">
+	<Run>%node="localhost:8100" !host="solo"</Run>
+
+    <Print>{"TcpServer open: ".append( node )}</Print>
+     
+    <Forms>
+		<html>
+			<head>
+				<title>{{@``}}</title>
+
+				<meta charset="UTF-8"/>
+				<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+				<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+                <link href="web/solo.css"  rel="stylesheet" type="text/css"/>
+                <script src="web/solo.js" type="application/javascript"/>
+                <script src="web/show_md.js" type="application/javascript"/>
+                <script src="web/show_cpp.js" type="application/javascript"/>
+                <script src="web/show_js.js" type="application/javascript"/>
+                <script src="web/show_css.js" type="application/javascript"/>
+                <script src="web/show_xml.js" type="application/javascript"/>
+           </head>
+
+			<body>
+				<div id="container">
+
+					<div id="logo-header">
+
+						<a href="/"><img id="logo" src="images/xepl.gif"/></a>
+ 					    
+						<div id="top-nav">
+						</div>
+                        <span onclick="clearHtml('right');goBack($_('mdview'));">Back</span>
+
+                        <div id="sec-nav">
+						</div>
+					    
+						<button onclick="clearHtml('right');GetXmlButtons( '{{host}}!xml_buttons' , 'right' )">Show</button>
+					</div>
+
+
+					<div id="main">
+
+						<div id="content">
+                        </div>
+
+						<div id="right" style="display:block">
+						</div>
+
+                        <div id="footer">
+                        </div>
+                     </div>
+
+
+				</div>
+				<div id="hidden" style="display:none"></div>
+			</body>
+		</html>
+
+		<show_neurons>
+			<script>GetXmlButtons( '{{host}}!xml_buttons' , 'right' )</script>
+		</show_neurons>
+
+        <xml_buttons>
+            <Neurons>
+                <Output>
+                    {{@parent`neurons`}}
+                </Output>
+            </Neurons>
+        </xml_buttons>
+
+        <sec_nav>
+            <button onclick="oneWay();GrabNGo( $_('mdview'), '{{host}}.cpp', Show_cpp )">CPP</button>
+            <button onclick="oneWay();GrabNGo( $_('mdview'), '{{host}}.xml', Show_xml )">XML</button>
+            <button onclick="oneWay();GrabNGo( $_('mdview'), 'web/{{host}}.js', Show_js )">JS</button>
+            <button onclick="oneWay();GrabNGo( $_('mdview'), 'web/{{host}}.css', Show_css )">CSS</button>
+            <button onclick="oneWay();GrabNGo( $_('mdview'), 'web/show_js.js', Show_js )">Show_js</button>
+            <button onclick="oneWay();GrabNGo( $_('mdview'), 'web/show_md.js', Show_js )">Show_md</button>
+            <button onclick="oneWay();GrabNGo( $_('mdview'), 'web/show_xml.js', Show_js )">Show_xml</button>
+            <button onclick="oneWay();GrabNGo( $_('mdview'), 'web/show_css.js', Show_js )">Show_css</button>
+            <button onclick="oneWay();GrabNGo( $_('mdview'), 'web/show_cpp.js', Show_js )">Show_cpp</button>
+        </sec_nav>
+        
+        <top_nav>
+            <button onclick="oneWay();GrabNGo( $_('mdview'), '../one/README.md', Show_md )">XEPL README</button>
+            <button onclick="oneWay();GrabNGo( $_('mdview'), 'README.md', Show_md )">SOLO README</button>
+            <button onclick="oneWay();GrabNGo( $_('mdview'), 'LICENSE', Show_md )">LICENSE</button>
+        </top_nav>
+
+        <footer>
+            <a target="xepl.info" href="https://github.com/xepl">Github </a>
+            <a target="xepl.info" href="https://xepl.com">XEPL.com </a>
+            <a target="xepl.info" href="https://xepl.tech">XEPL Technology </a>
+            <a target="xepl.info" href="https://xepl.services">XEPL Services </a>
+            <a target="xepl.info" href="https://xepl.shop">XEPL Shop </a>
+        </footer>
+
+    </Forms>
+
+
+    <Run>{!me=@``}</Run>
+
+    <Genes>
+        <mimes>
+			<htm>text/html</htm>
+			<html>text/html</html>
+			<css>text/css</css>
+			<js>application/javascript</js>
+			<xml>text/xml</xml>
+			<txt>text/plain</txt>
+			<xepl>text/plain</xepl>
+			<cpp>text/plain</cpp>
+			<cc>text/plain</cc>
+			<hpp>text/plain</hpp>
+			<h>text/plain</h>
+			<gif>image/gif</gif>
+			<md>text/markdown</md>
+			<png>image/png</png>
+			<jpg>image/jpeg</jpg>
+			<jpeg>image/jpeg</jpeg>
+			<mp4>video/mp4</mp4>
+            <svg>image/svg+xml</svg>
+		</mimes>
+
+    </Genes>
+
+    <SocketMan />
+
+
+    <TcpServer node="{node}" host="{host}">
+        <Print>{"TcpServer connect:".tab(from)}</Print>
+        <HttpServer name="Http">
+
+            <Synapses>
+                <parent.eReceived>!blocks=!blocks.add(1)
+                    <Senson_Has_Input/>
+                </parent.eReceived>
+
+                <TcpServer.closed>
+                    <Senson_Is_Closed/>
+                </TcpServer.closed>
+        
+                <HttpRequestAxon>!requests=!requests.add(1)
+                    <Index>trigger
+                        <When>{$'request'}
+                            <GET>
+                                <GET uri="{$'uri'.after('/')}"/>
+                            </GET>
+                           <NotFound>
+                                <Print>{"Request Not found".tab($>)}</Print>
+                                <Respond statusCode="500" reason="Not Found"/>
+                            </NotFound>
+                        </When>
+                    </Index>
+                </HttpRequestAxon>
+
+                <HttpResponseAxon>!responses=!responses.add(1)
+                    <TcpServer.SendContent/>
+                </HttpResponseAxon>
+
+                <HttpClosedAxon>
+                    <TcpServer.Closed/>
+                </HttpClosedAxon>
+            </Synapses>
+
+            <Methods>
+                <GET>!gets=!gets.add(1)
+                    <Run>{%choices='!$'}</Run>
+                    <Run>{%choice=uri.nextAny( choices )} </Run>
+                    <Run>{%mytarget=uri.beforeAny( choices )}</Run>
+                    <Run>{%form=uri.afterAny( choices )}</Run>
+
+                    <Yes>mytarget.empty
+                        <Respond>
+                            <Html>
+                                <Markup>
+                                    {{'&lt;!DOCTYPE html &gt;'.deamp.cr.lf}}
+                                    <html>
+                                        <Scribble form="html" neuron="{host}" subform="{@`path`}"/>
+                                    </html>
+                                </Markup>
+                            </Html>
+                        </Respond>
+                    </Yes>
+
+                    <No>mytarget.empty
+                        <When>choice.is('!') ? "html" : { choice.is( '$' ) ? "text" : "file" }
+                            <html>
+                                <Respond contents="text/html" pragma="no-cache">
+                                    <Html>
+                                        <Markup>
+                                            <Scribble neuron="{ mytarget }" form="{ form }"/>
+                                        </Markup>
+                                    </Html>
+                                </Respond>
+                            </html>
+                            <text>
+                                <Respond contents="text/xml" pragma="no-cache">
+                                    <Text>
+                                        <Markup>
+                                            <Scribble neuron="{ mytarget }" form="{ form }"/>
+                                        </Markup>
+                                    </Text>
+                                </Respond>
+                            </text>
+                            <file>
+                                <FileRead filename="{mytarget}">
+                                    <Missing>
+                                        <Http.Respond statusCode="404" reason="File not found"/> 
+                                    </Missing>
+                                    <Found>
+                                        <Http.Respond contents="{ $mimes/{mytarget.afterLast('.').lower}| }">
+                                            <Html>{{$|}}</Html>
+                                        </Http.Respond>		
+
+                                    </Found>
+                                </FileRead>
+                            </file>
+
+                        </When>
+                    </No>
+                </GET>
+            </Methods>
+        </HttpServer>
+        <TcpServer.Start/>
+    </TcpServer>
+
+</Lobe>

@@ -1,0 +1,226 @@
+/*! SPDX: AGPL-3.0-only */
+/*! XEPL Solo Environment - Copyright (c) 2024 Keith Edwin Robbins
+	Project Name: XEPL Solo Environment
+	File Name:    solo.css
+	Author:       Keith Edwin Robbins
+	Release date: May 10, 2024
+	Website:      https://xepl.com
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published by
+    the Free Software Foundation version 3 of the License.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+	For more information about the AGPL, please visit:
+ 	https://www.gnu.org/licenses/agpl-3.0.html
+*/
+
+
+:root {
+	--nav_height: 40px;
+	--footer_height: 40px;
+	--right_col_width: 200px;
+  
+	--primary-bg-color: #f0f0f0;
+	--right-bg-color: var(--primary-bg-color);
+	--footer-bg-color: var(--primary-bg-color);
+  }
+  
+  
+  #container {
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+  }
+  
+  #logo-header {
+	height: var(--nav_height);
+	background-color: var(--primary-bg-color);
+	flex-shrink: 0;
+	display: flex;
+	align-items: center;
+  }
+  
+  #main {
+	height: calc(100% - calc(2 * var(--nav_height)) );
+	position: relative;
+  }
+  
+  #footer {
+	height: var(--footer_height);
+	background-color: var(--footer-bg-color);
+	flex-shrink: 0;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+  }
+  
+  
+  #logo {
+	width: var(--nav_height);
+	height: var(--nav_height);
+  }
+  
+  #top-nav {
+	flex-grow: 1;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	height: var(--nav_height);
+	background-color: var(--primary-bg-color);
+  }
+  
+  #sec-nav {
+	justify-content: flex-start;
+	align-items: center;
+	height: var(--nav_height);
+	background-color: var(--primary-bg-color);
+	display: flex;
+	flex-shrink: 0;
+  }
+  
+
+  #right {
+	width: var(--right_col_width);
+	background-color: var(--right-bg-color);
+	position: absolute;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	display: none;
+	overflow: auto;
+  }
+  
+  #content {
+	display: flex;
+	flex-direction: column; 
+	margin-right: var(--right_col_width);
+	overflow-y: auto;
+	height: 100%;
+  }
+  
+
+  @media (max-width: 768px) {
+	.main-container {
+	  flex-direction: column;
+	}
+  
+	.sidebar {
+	  width: 100%;
+	}
+  }
+  
+  @media (min-width: 768px) {
+	h1 {
+	  font-size: 3rem;
+	}
+  
+	p {
+	  font-size: 1.2rem;
+	}
+  }
+
+.twoway {
+    background-image: linear-gradient(to right, white 50%, yellow 50%);
+    border: none; 
+}
+
+#right > li {
+	font-size: 80%;
+}
+
+#mdview{
+	box-sizing: border-box;
+	width: 100%;
+	flex: 1;
+	overflow-y: auto;
+	padding: 10px;
+  }
+
+.image-container > img {
+	width: 75%;
+	align-content: center;
+}
+
+.image-title {
+	text-align: center;
+}
+  
+  
+
+
+
+.gene {
+    margin-left: 0; 
+ }
+ 
+ .geneName {
+   cursor: pointer;
+   font-weight: bold;
+   display: inline;
+ }
+ 
+ .subgenes, .geneWire {
+   margin-left: 20px;
+   padding: 2px;
+   border-left: 1px dashed gray;
+ }
+ 
+ .geneWire {
+   font-family: monospace;
+   background-color: lightyellow;
+ }
+ 
+ .trait {
+   background-color: lightcyan;
+   margin-left: 8px;
+ }
+ 
+ .traitName {
+    font-weight: bold;
+ }
+ 
+ .traitValue {
+   font-family: 'Courier New', Courier, monospace;
+   margin-right: 3px;
+ }
+ 
+
+
+
+
+.menu-item {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    margin: 2px;
+    cursor: pointer;
+}
+
+.sub-menu {
+    margin-left: 20px;
+}
+
+
+
+
+#mdview > h2 {
+	text-align: center;
+}
+
+h6 {
+	text-align: center;
+	font-size:larger;
+}
+
+img {
+	align-items: center;
+}
+
+
