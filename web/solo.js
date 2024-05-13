@@ -290,7 +290,8 @@ window.addEventListener('load', function() {
 	Get( $_('footer'), 'solo!footer'  );
 	Get( $_('top-nav'), 'solo!top_nav') ;
 	Get( $_('sec-nav'), 'solo!sec_nav') ;
-	oneWay();
-	GrabNGo( $_('mdview'), 'docs/xepl-solo.md', Show_md );
+//	oneWay();
+GetXmlButtons( 'solo!xml_buttons' , 'right' );
+//	GrabNGo( $_('mdview'), 'docs/WELCOME.md', Show_md );
 });
 

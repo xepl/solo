@@ -10,7 +10,7 @@ XEPL Solo is a cheap and easy Html/Javascript User Interface.
 
 XEPL OE + SOLO is a Cortex + User Interface Demonstration of XEPL.
 
-![](https://www.xepl.net/images/solo/DALL·E%202024-04-23%2009.11.16.jpg)
+![Individual Development Environment](https://www.xepl.net/images/solo/DALL·E%202024-04-23%2009.11.16.jpg)
 
 Together, XEPL OE + SOLO provides a dynamic Web Server implementation for viewing the contents of a running Cortex.
 

@@ -23,6 +23,8 @@
 */
 
 function Show_md(targetDiv, data) {
+
+	var go_left = false;
   
 	function markdownToHtml(markdown) {
 		const linkRegex = /\[(.*?)\]\((.*?)\)/g;
@@ -104,17 +106,28 @@ function Show_md(targetDiv, data) {
 		function addImage(container, imagePath) {
 		  
 			imageContainer = document.createElement('div');
-			imageContainer.className = 'image-container';
+			imageContainer.className = 'md-image-container';
 
 			const img = document.createElement('img');
 			img.src = imagePath;
 			imageContainer.appendChild(img);
 		  
-			const textContainer = document.createElement('div');
-			textContainer.className = 'image-title';
+			const textContainer = document.createElement('h3');
+			textContainer.className = 'md-image-title';
 		  
-			container.appendChild(imageContainer);
-			container.appendChild(textContainer);
+
+			if ( go_left )
+			{	
+				container.appendChild(imageContainer);
+				container.appendChild(textContainer);
+				go_left = false;
+			}
+			else			
+			{	
+				container.appendChild(textContainer);
+				container.appendChild(imageContainer);
+				go_left = true;
+			}
 		  
 			return textContainer;
 		  }
@@ -221,37 +234,47 @@ function Show_md(targetDiv, data) {
 		}
 
         // Blockquotes
-        else if (/^>\s/.test(trimmedLine)) {
-            convertLinks();
-            currentElement = document.createElement('blockquote');
-            const quoteText = trimmedLine.slice(1).trim();
-            
-            const inlineCodeMatches = quoteText.match(/`[^`]+`/g);
-            if (inlineCodeMatches) {
-                let remainingText = quoteText;
-                inlineCodeMatches.forEach(match => {
-                    const matchIndex = remainingText.indexOf(match);
-                    const precedingText = remainingText.slice(0, matchIndex);
-                    const codeText = match.slice(1, -1);
-                    
-                    if (precedingText) {
-                        currentElement.appendChild(document.createTextNode(precedingText));
-                    }
-                    
-                    currentElement.appendChild(createInlineCode(codeText));
-                    remainingText = remainingText.slice(matchIndex + match.length);
-                });
-                
-                if (remainingText) {
-                    currentElement.appendChild(document.createTextNode(remainingText));
-                }
-            } else {
-                currentElement.textContent = quoteText;
-            }
-            
-            targetDiv.appendChild(currentElement);
-        }	
-		// Paragraphs
+		else if (/^>\s/.test(trimmedLine)) {
+			convertLinks();
+			currentElement = document.createElement('blockquote');
+			const quoteText = trimmedLine.slice(1).trim();
+			
+			// Improved regex to handle multiple backticks and prevent greedy matches
+			const inlineCodeMatches = quoteText.match(/`+([^`]+)`+/g);
+			if (inlineCodeMatches) {
+				let remainingText = quoteText;
+				inlineCodeMatches.forEach(match => {
+					const matchIndex = remainingText.indexOf(match);
+					const precedingText = remainingText.slice(0, matchIndex);
+					const codeText = match.slice(1, -1);  // Modified to skip the initial and final backtick
+					
+					// Append text node for the text before the code
+					if (precedingText) {
+						currentElement.appendChild(document.createTextNode(precedingText));
+					}
+					
+					// Create a code element and append it
+					const codeElement = document.createElement('code');
+					codeElement.textContent = codeText;  // Use textContent to escape HTML entities
+					currentElement.appendChild(codeElement);
+					
+					// Update remainingText to process text after the current code block
+					remainingText = remainingText.slice(matchIndex + match.length);
+				});
+				
+				// Handle any remaining text after the last code block
+				if (remainingText) {
+					currentElement.appendChild(document.createTextNode(remainingText));
+				}
+			} else {
+				// If no inline code, just set the text of the blockquote
+				currentElement.textContent = quoteText;
+			}
+			
+			// Append the fully constructed blockquote to the targetDiv
+			targetDiv.appendChild(currentElement);
+		}
+				// Paragraphs
 		else if (trimmedLine) {
 			if (! currentElement || currentElement.tagName != 'P') {
 				convertLinks();

@@ -65,6 +65,15 @@
 					<div id="main">
 
 						<div id="content">
+                            <div class="image-container">
+                            <a target="xepl.info" href="https://github.com/xepl"> <img src="https://xepl.net/promo/image_1.jpg"/></a>
+                            <a target="xepl.info" href="https://xepl.tech"><img src="https://xepl.net/promo/image_2.jpg"/> </a>
+                            <a target="xepl.info" href="https://xepl.services"><img src="https://xepl.net/promo/image_3.jpg"/></a>
+                            <a target="xepl.info" href="https://xepl.shop"><img src="https://xepl.net/promo/image_4.jpg"/> </a>
+                            </div>
+                            <div class="image-container" onclick="oneWay();GrabNGo( $_('mdview'), 'docs/xepl-solo.md', Show_md )">
+                            <img class="image-main" src="https://xepl.net/promo/image_5.jpg"/> 
+                            </div>
                         </div>
 
 						<div id="right" style="display:block">
@@ -105,8 +114,9 @@
         </sec_nav>
         
         <top_nav>
-            <button onclick="oneWay();GrabNGo( $_('mdview'), '../one/README.md', Show_md )">XEPL README</button>
+            <button onclick="oneWay();GrabNGo( $_('mdview'), '../one/README.md', Show_md )">XEPL</button>
             <button onclick="oneWay();GrabNGo( $_('mdview'), 'README.md', Show_md )">SOLO README</button>
+            <button onclick="oneWay();GrabNGo( $_('mdview'), 'docs/xepl-solo.md', Show_md )">SOLO</button>
             <button onclick="oneWay();GrabNGo( $_('mdview'), 'LICENSE', Show_md )">LICENSE</button>
         </top_nav>
 

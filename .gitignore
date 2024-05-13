@@ -1,4 +1,5 @@
-*/*.dSYM/
+solo
+*.dSYM/
 .DS_Store
 
 # Object files

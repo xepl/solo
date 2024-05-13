@@ -22,7 +22,11 @@
  	https://www.gnu.org/licenses/agpl-3.0.html
 */
 
-
+body {
+	margin: 0px;
+	padding-left: 4px;
+	padding-right: 4px;
+}
 :root {
 	--nav_height: 40px;
 	--footer_height: 40px;
@@ -33,7 +37,7 @@
 	--footer-bg-color: var(--primary-bg-color);
   }
   
-  
+ 
   #container {
 	display: flex;
 	flex-direction: column;
@@ -125,7 +129,13 @@
 	p {
 	  font-size: 1.2rem;
 	}
-  }
+	.container {
+		display: flex; /* Establishes a flex container */
+		justify-content: center; /* Centers the content horizontally */
+		align-items: center; /* Aligns items vertically in the middle */
+		margin-top: 20px; /* Adds space on the top */
+	}
+ }
 
 .twoway {
     background-image: linear-gradient(to right, white 50%, yellow 50%);
@@ -144,16 +154,22 @@
 	padding: 10px;
   }
 
-.image-container > img {
-	width: 75%;
-	align-content: center;
-}
 
-.image-title {
-	text-align: center;
+.md-image-container {
+	flex: 1; /* Allows the image container to grow */
+	display: flex; /* Makes the image container a flex container */
+	justify-content: center; /* Centers the image horizontally */
+	align-items: center; /* Aligns the image vertically */
 }
-  
-  
+.md-image-container img {
+	max-width: 100%; /* Ensures the image doesn't exceed its container */
+	height: auto; /* Maintains aspect ratio */
+}
+.md-image-title {
+	flex: 1; /* Allows the title container to grow equally */
+	text-align: center; /* Centers the text horizontally */
+	padding: 10px; /* Adds padding around the text */
+}
 
 
 
@@ -224,3 +240,41 @@ img {
 }
 
 
+.image-container {
+	display: flex;
+	justify-content: space-around;
+	margin: 10px;
+}
+.image-container img {
+	width: 70%; /* Adjust the size of the images */
+	cursor: pointer; /* Changes the cursor to indicate it's clickable */
+	border: 2px solid #ccc; /* Adds a border around the images */
+	padding: 10px; /* Adds space around the image */
+	transition: transform 0.2s; /* Animation for click */
+}
+.image-container  img:hover {
+	transform: scale(1.1); /* Scales the image on hover */
+	border-color: #444; /* Changes border color on hover */
+}
+
+.image-main
+{
+	width:100%;
+}
+
+
+
+h1 {
+	position: relative; /* Needed to position the pseudo-element */
+	padding-top: 20px; /* Adds space above the text */
+}
+
+h1:before {
+	content: ""; /* Required for the pseudo-element to display */
+	position: absolute; /* Positions the pseudo-element absolutely relative to its parent */
+	top: 0; /* Position it at the top of the h1 */
+	left: 0; /* Align it to the left */
+	width: 100%; /* Full width of the h1 element */
+	height: 1px; /* Height of the horizontal line */
+	background-color: #000; /* Color of the horizontal line */
+}
