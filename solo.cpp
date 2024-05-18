@@ -37,6 +37,38 @@
 #include "../one/xepl_defaults.hpp"
 #include "../one/xepl_string_tools.hpp"
 
+
+bool XEPL::Show_Trace          = false;
+bool XEPL::Show_Memory_Counts  = true;
+bool XEPL::Show_Counters       = false;
+
+
+namespace KITS::MAIN
+{
+	int argc;
+	char** argv;
+	char** arge;
+	int main( int argc, char** argv, char** );
+
+	void Command_Main( XEPL::String* _opt )
+	{
+		main(  argc, argv, arge );
+	}
+	void Register_Try_Kit( XEPL::Cortex* _cortex )
+	{
+		_cortex->Register_Command( "Main",  [] ( XEPL::String* _opt ) {
+			KITS::MAIN::Command_Main( _opt );
+		} );
+	}
+	void Initialize( int _argc, char** _argv, char** _arge )
+	{
+		argc = _argc;
+		argv = _argv;
+		arge = _arge;
+	}
+}
+
+
 int main_brain( XEPL::Text* _command, XEPL::Text* _sys_command )
 {
 	bool reboot = true;
@@ -54,6 +86,7 @@ int main_brain( XEPL::Text* _command, XEPL::Text* _sys_command )
 			KITS::HTTP::Register_Http_Kit           ( &cortex );
 			KITS::HTML::Register_Html_Kit           ( &cortex );
 			KITS::TIMER::Register_Timer_Kit         ( &cortex );
+			KITS::MAIN::Register_Try_Kit            ( &cortex );
 
 			cortex.Register_Mutual ( "trigger",  [] ( XEPL::Nucleus* )          { return static_cast<XEPL::Gene*> ( XEPL::tlsLobe->trigger_atom ); } );
 			cortex.Register_Mutual ( "outdex",   [] ( XEPL::Nucleus* )          { return XEPL::tlsLobe->outdex_link; } );
@@ -80,6 +113,17 @@ int main_brain( XEPL::Text* _command, XEPL::Text* _sys_command )
 	return 0;
 }
 
+
+int KITS::MAIN::main(int argc, char* argv[], char* arge[]) 
+{
+    for (int i = 0; i < argc; i++) 
+		std::cout << argv[i] << ' ';
+	std::cout << std::endl;
+    return 0;
+}
+
+
+
 #ifdef _WIN32
 int main ( int, char**, char** )
 {
@@ -102,9 +146,11 @@ int main ( int, char**, char** )
 	return 0;
 }
 #else
-int main ( int, char**, char** )
+int main ( int argc, char** argv, char** argenv)
 {
 	signal ( SIGPIPE, SIG_IGN );
+
+	KITS::MAIN::Initialize( argc, argv, argenv );
 
 	main_brain( "}solo", "open http://localhost:8100" );
 
