@@ -23,16 +23,17 @@
 */
 
 #include "../one/xepl.cc"
-#include "../one/xepl_file_kit.hpp"
-#include "../one/xepl_cli_kit.hpp"
-#include "../one/xepl_http_kit.hpp"
-#include "../one/xepl_html_kit.hpp"
-#include "../one/xepl_text_kit.hpp"
-#include "../one/xepl_socket_kit.hpp"
-#include "../one/xepl_keyword_kit.hpp"
-#include "../one/xepl_operator_kit.hpp"
-#include "../one/xepl_splicer_kit.hpp"
-#include "../one/xepl_timer_kit.hpp"
+
+#include "../kits/xepl_file_kit.hpp"
+#include "../kits/xepl_cli_kit.hpp"
+#include "../kits/xepl_http_kit.hpp"
+#include "../kits/xepl_html_kit.hpp"
+#include "../kits/xepl_text_kit.hpp"
+#include "../kits/xepl_socket_kit.hpp"
+#include "../kits/xepl_keyword_kit.hpp"
+#include "../kits/xepl_operator_kit.hpp"
+#include "../kits/xepl_splicer_kit.hpp"
+#include "../kits/xepl_timer_kit.hpp"
 
 #include "../one/xepl_defaults.hpp"
 #include "../one/xepl_string_tools.hpp"
