@@ -162,18 +162,9 @@
 
     <TcpServer node="{node}" host="{host}">
         <Print>{"TcpServer connect:".tab(from)}</Print>
-        <HttpServer name="Http">
-
+        <HttpServer>
             <Synapses>
-                <parent.eReceived>!blocks=!blocks.add(1)
-                    <Senson_Has_Input/>
-                </parent.eReceived>
-
-                <TcpServer.closed>
-                    <Senson_Is_Closed/>
-                </TcpServer.closed>
-        
-                <HttpRequestAxon>!requests=!requests.add(1)
+                 <HttpRequestAxon>!requests=!requests.add(1)
                     <Index>trigger
                         <When>{$'request'}
                             <GET>
@@ -187,10 +178,18 @@
                     </Index>
                 </HttpRequestAxon>
 
+                <parent.eReceived>!blocks=!blocks.add(1)
+                    <Senson_Has_Input/>
+                </parent.eReceived>
+
                 <HttpResponseAxon>!responses=!responses.add(1)
                     <TcpServer.SendContent/>
                 </HttpResponseAxon>
 
+                <TcpServer.closed>
+                    <Senson_Is_Closed/>
+                </TcpServer.closed>
+        
                 <HttpClosedAxon>
                     <TcpServer.Closed/>
                 </HttpClosedAxon>
@@ -239,12 +238,12 @@
                             <file>
                                 <FileRead filename="{mytarget}">
                                     <Missing>
-                                        <Http.Respond statusCode="404" reason="File not found"/> 
+                                        <HttpServer.Respond statusCode="404" reason="File not found"/> 
                                     </Missing>
                                     <Found>
-                                        <Http.Respond contents="{ $mimes/{mytarget.afterLast('.').lower}| }">
+                                        <HttpServer.Respond contents="{ $mimes/{mytarget.afterLast('.').lower}| }">
                                             <Html>{{$|}}</Html>
-                                        </Http.Respond>		
+                                        </HttpServer.Respond>		
 
                                     </Found>
                                 </FileRead>

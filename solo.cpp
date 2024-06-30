@@ -22,17 +22,9 @@
  	https://www.gnu.org/licenses/agpl-3.0.html
 */
 
-#include "../one/xepl.cc"
+#include "../one/xepl.hpp"
 #include "../kits/xepl_all_kits.cc"
-
-#include "../one/xepl_defaults.hpp"
-#include "../one/xepl_string_tools.hpp"
-
-
-bool XEPL::Show_Trace          = true;
-bool XEPL::Show_Memory_Counts  = true;
-bool XEPL::Show_Counters       = true;
-
+#include "../kits/PerformanceTimer.hpp"
 
 int main_brain( XEPL::Text* _command, XEPL::Text* _sys_command )
 {
@@ -85,6 +77,8 @@ int main ( int, char**, char** )
 	WSADATA wsaData;
 	WSAStartup(MAKEWORD(2,2), &wsaData);
 
+	KITS::MAIN::Initialize( argc, argv, argenv );
+
 	main_brain( "}solo", "cmd /c start http://localhost:8100" );
 
 	WSACleanup();
@@ -95,6 +89,8 @@ int main ( int, char**, char** )
 int main ( int, char**, char** )
 {
 	signal ( SIGPIPE, SIG_IGN );
+
+	KITS::MAIN::Initialize( argc, argv, argenv );
 
 	main_brain( "}solo", "xdg-open http://localhost:8100" );
 

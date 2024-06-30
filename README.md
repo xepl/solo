@@ -1,5 +1,5 @@
 
-# XEPL SOLO Environment
+# XEPL OE + KITS + SOLO
 
 The XEPL OE is seed software you can use to build incredible soft systems ... aka Programming.
 
